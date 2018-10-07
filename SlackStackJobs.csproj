@@ -4,10 +4,11 @@
     <OutputType>Exe</OutputType>
     <AzureFunctionsVersion>v2</AzureFunctionsVersion>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <LangVersion>7.1</LangVersion>
+    <LangVersion>latest</LangVersion>
     <DocumentationFile>C:\Development\Repos\SlackStackBot\SlackStackJobs\SlackStackJobs.xml</DocumentationFile>
   </PropertyGroup>
 

@@ -1,0 +1,8 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=slackstackstorage;AccountKey=F1rjyp0/TJPBXdBXPhN509CvIo1z8uE+P8l8ForfNm/uYmY/PcIXNN8hTxdGd0ah+wQENw83EwoIGo3FW5WwTg==;EndpointSuffix=core.windows.net",
+    "AzureWebJobsDashboard": "",
+    "AzureWebJobsCosmosDB": "AccountEndpoint=https://slack-stack-bot.documents.azure.com:443/;AccountKey=1tlyWXWFxFwjXI8AqJzDNqqCv7ScuKDKK9iV2mTqgH0JydjUYgC2IFuqb6lHGYGftrU8AVmY60Xk56wCayEUkA==;"
+  }
+}

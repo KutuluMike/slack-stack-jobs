@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SlackStackJobs</name>
+    </assembly>
+    <members>
+        <member name="T:SlackStackFeeder.StackFunctions">
+            <summary>
+            Azure WebJobs functions for interacting with Slack teams.
+            </summary>
+        </member>
+        <member name="M:SlackStackFeeder.StackFunctions.StackFeeder(SlackStackJobs.Models.QueuedJob,SlackStackJobs.Models.SlackStackState,SlackStackJobs.Models.SlackTeam,System.DateTime,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            WebJob function to post new Stack Exchange messages to one or more Slack channels
+            </summary>
+            <param name="job">Queue job information from Azure</param>
+            <param name="state">Current state of the Slack connection to Stack Exchange</param>
+            <param name="team">Information about a Slack team with one or more Stack Exchange subscriptions</param>
+            <param name="processed">Date this feed is being processed</param>
+            <param name="log">Logging interface</param>
+        </member>
+        <member name="M:SlackStackFeeder.StackFunctions.Slackify(System.String)">
+            <summary>
+            Desperate attempt to bludgeon HTML into something resembling Slack markdown so we can put it into
+            an attachment. This can't ever possibly work 100% of the time but we do what we can.
+            </summary>
+            <param name="html">Original HTML markup read from the Stack RSS feed.</param>
+            <returns>Equivalent (roughly) text marked up using Slack Markdown</returns>
+        </member>
+    </members>
+</doc>

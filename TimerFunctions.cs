@@ -16,7 +16,7 @@ namespace SlackStackJobs
         public static void FeedTimer(
             [TimerTrigger("0 */30 * * * *")] TimerInfo timer,
             [CosmosDB("FeedStateDatabase", "FeedItemsCollection", ConnectionStringSetting = "slackstackfeed_CosmosDB", Id = "state")] SlackStackState state,
-            [Queue("slackfeed-items")] ICollector<QueuedJob> triggers,
+            [Queue("slackfeed-items", Connection = "slackstackfeed_QueueStorage")] ICollector<QueuedJob> triggers,
             ILogger log)
         {
             if (state == null)

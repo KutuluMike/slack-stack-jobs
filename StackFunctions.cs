@@ -30,7 +30,7 @@ namespace SlackStackJobs
         /// <param name="log">Logging interface</param>
         [FunctionName("StackFeeder")]
         public static void StackFeeder(
-            [QueueTrigger("slackfeed-items")] QueuedJob job,
+            [QueueTrigger("slackfeed-items", Connection = "slackstackfeed_QueueStorage")] QueuedJob job,
             [CosmosDB("FeedStateDatabase", "FeedItemsCollection", ConnectionStringSetting = "slackstackfeed_CosmosDB", Id = "state")] SlackStackState state,
             [CosmosDB("FeedStateDatabase", "FeedItemsCollection", ConnectionStringSetting = "slackstackfeed_CosmosDB", Id = "{team}")] SlackTeam team,
             DateTime processed,

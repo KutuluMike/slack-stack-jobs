@@ -1,6 +1,3 @@
-// Copyright (c)Mike Edenfield <kutulu@kutulu.org>. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
-
 using System;
 using System.Linq;
 using System.Net;
@@ -11,13 +8,14 @@ using Microsoft.Extensions.Logging;
 
 using SlackStackJobs.Models;
 
-namespace SlackStackFeeder
+namespace SlackStackJobs
 {
     public static class TimerFunctions
     {
-        public static void TimerFeed(
+        [FunctionName("FeedTimer")]
+        public static void FeedTimer(
             [TimerTrigger("0 */30 * * * *")] TimerInfo timer,
-            [CosmosDB("FeedStateDatabase", "FeedItemsCollection", ConnectionStringSetting = "CosmosDB", Id = "state")] SlackStackState state,
+            [CosmosDB("FeedStateDatabase", "FeedItemsCollection", ConnectionStringSetting = "slackstackfeed_CosmosDB", Id = "state")] SlackStackState state,
             [Queue("slackfeed-items")] ICollector<QueuedJob> triggers,
             ILogger log)
         {
@@ -37,7 +35,8 @@ namespace SlackStackFeeder
                 log.LogDebug("state feeds empty.");
             }
 
-            foreach ((var key, var feed) in state.Feeds)
+            // NOTE: KeyValuePair has no built-in deconstructor, but tuple does. We could either write an extension method, or convert the Dictionary items.
+            foreach ((var key, var feed) in state.Feeds.Select(x => (x.Key, x.Value)))
             {
                 if (key == null || feed == null || feed.Teams == null || !feed.Teams.Any())
                 {

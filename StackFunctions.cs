@@ -1,6 +1,3 @@
-// Copyright (c)Mike Edenfield <kutulu@kutulu.org>. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +13,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using SlackStackJobs.Models;
 
-namespace SlackStackFeeder
+namespace SlackStackJobs
 {
     /// <summary>
     /// Azure WebJobs functions for interacting with Slack teams.
@@ -31,10 +28,11 @@ namespace SlackStackFeeder
         /// <param name="team">Information about a Slack team with one or more Stack Exchange subscriptions</param>
         /// <param name="processed">Date this feed is being processed</param>
         /// <param name="log">Logging interface</param>
+        [FunctionName("StackFeeder")]
         public static void StackFeeder(
             [QueueTrigger("slackfeed-items")] QueuedJob job,
-            [CosmosDB("FeedStateDatabase", "FeedItemsCollection", ConnectionStringSetting = "slackstackfeed_DOCUMENTDB", Id = "state")] SlackStackState state,
-            [CosmosDB("FeedStateDatabase", "FeedItemsCollection", ConnectionStringSetting = "slackstackfeed_DOCUMENTDB", Id = "{team}")] SlackTeam team,
+            [CosmosDB("FeedStateDatabase", "FeedItemsCollection", ConnectionStringSetting = "slackstackfeed_CosmosDB", Id = "state")] SlackStackState state,
+            [CosmosDB("FeedStateDatabase", "FeedItemsCollection", ConnectionStringSetting = "slackstackfeed_CosmosDB", Id = "{team}")] SlackTeam team,
             DateTime processed,
             ILogger log)
         {
